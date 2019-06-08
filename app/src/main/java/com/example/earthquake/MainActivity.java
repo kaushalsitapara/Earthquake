@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-
+            QueryUtilsAsync task = new QueryUtilsAsync();
+            task.execute().get();
             ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
 

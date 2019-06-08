@@ -32,8 +32,7 @@ public final class QueryUtils {
 
         try {
 
-            QueryUtilsAsync task = new QueryUtilsAsync();
-            task.execute().get();
+
 
             JSONObject baseJsonResponse = new JSONObject(jsonResponse);
 
