@@ -11,36 +11,39 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
 
-        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
-
-
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
-
-        final EarthquakeAdapter adapter = new EarthquakeAdapter(this, earthquakes);
-
-        earthquakeListView.setAdapter(adapter);
-
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                Earthquake currentEarthquake = adapter.getItem(position);
+            ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
 
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
+            ListView earthquakeListView = (ListView) findViewById(R.id.list);
+
+            final EarthquakeAdapter adapter = new EarthquakeAdapter(this, earthquakes);
+
+            earthquakeListView.setAdapter(adapter);
+
+            earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                    Earthquake currentEarthquake = adapter.getItem(position);
 
 
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                    Uri earthquakeUri = Uri.parse(currentEarthquake.getUrl());
 
-                startActivity(websiteIntent);
-            }
-        });
+
+                    Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+
+                    startActivity(websiteIntent);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
